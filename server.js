@@ -2,8 +2,14 @@ const express = require('express')
 
 const app = express()
 
+app.use(express.urlencoded({ extended: false }))
+app.use(express.json({ extended: false }))
+
 app.post("/api/register", (req, res) => {
-    res.send('inside backend')
+    console.log(req.body);
+    res.json({
+        message: "data recieved"
+    })
 })
 
 app.get('/api/users', (req, res) => {
