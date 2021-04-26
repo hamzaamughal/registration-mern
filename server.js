@@ -2,8 +2,12 @@ const express = require('express')
 
 const app = express()
 
-app.get("/", (req, res) => {
+app.post("/api/register", (req, res) => {
     res.send('inside backend')
+})
+
+app.get('/api/users', (req, res) => {
+
 })
 
 const PORT = 5000;
