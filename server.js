@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const User = require('./models/user')
 
 const app = express()
 
@@ -25,11 +26,20 @@ const connectDB = async () => {
 //connect DataBase
 connectDB()
 
-app.post("/api/register", (req, res) => {
-    console.log(req.body);
-    res.json({
-        message: "data recieved"
-    })
+app.post("/api/register", async (req, res) => {
+    try {
+        await User.create({
+            name: req.body.userName,
+            email: req.body.userEmail
+        })
+        res.json({
+            message: "User Registered"
+        })
+    } catch (error) {
+        res.json({
+            message: "That email is already registered"
+        })
+    }
 })
 
 app.get('/api/users', (req, res) => {
